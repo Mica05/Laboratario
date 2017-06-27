@@ -1,0 +1,1 @@
+let saludo:string = "Hola Mundo";
