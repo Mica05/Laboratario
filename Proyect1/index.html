@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="funciones.js"></script>
+    <title></title>
+</head>
+<body>
+   	<title>Blog</title>
+</head>
+<body>
+	<div class="container">
+  <div class="row">
+		<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 color1">
+
+			<button type="button" class="btn btn-primary col-sm-12" name="nuevopost" onclick="MostrarModalPost()" id="post">Nuevo Post</button>
+      
+		</div>
+  
+	</div>
+  <div class="container" id="txtpost">
+    
+    
+  </div>
+  
+	<div class="container">
+  <!-- Modal -->
+  <nav>
+  <li>                                                                                           
+                        <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal">
+                        New Contact
+                        </button>
+                    </li>
+                    </nav>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+
+            </div>
+            <div class="modal-body">
+                <form action="#" id="postForm" method="post" class="form-horizontal">
+                    <div class="form-group">
+        Titulo<br>
+          <input type="text" name="title" id="titulo"><br>
+          Header<br>
+          <input type="text" name="head" id="header"><br>
+          Post<br>
+          <input type="text" name="post" id="texto"><br>
+          Autor<br>
+          <input type="text" name="autor" id="autor"><br>
+          
+        </div>
+          <div class="form-group">
+                        <div class="col-md-5 col-md-offset-3">
+                            <button type="submit" id="btnSubmit" class="btn btn-default">Enviar</button>
+                        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+    $("#btnSubmit").click(function(e){
+        e.preventDefault(); // lo pongo x mi form MODAL
+        $("#myModal").modal('hide');//oculto el form modal
+         // https://preloaders.net/
+         $("#salida").html("<img src='455.gif'>");
+
+         //preparo los datos
+            var nombre = document.getElementById('titulo').value;
+            var email = document.getElementById('header').value;
+            var webSite = document.getElementById('texto').value;
+            var ubicacion = document.getElementById('autor').value;
+            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            //preferencias del usuario
+            var color = getParameterByName("color");
+            var fuente = getParameterByName("fuente");
+
+            var datosPost = {               
+                "titulo":nombre,
+                "header":email,
+                "texto":webSite,
+                "autor":fechaNacimiento 
+            }
+            // ARMO LA MAGIA para recibir DATOS
+           //var objJson = JSON.parse(datosPost);
+            var objJson = JSON.stringify(datosPost);
+
+        $.ajax({
+            "url": 'http://localhost:1337/crearNuevoContacto',
+            "type": 'POST',
+            "data": objJson ,
+            "dataType":'JSON',
+             "async": true,
+            "success": function(data){                
+                console.log(fuente);
+               // alert("success");
+                   
+                  var nuevoContacto = "<div class='row'>";
+                  nuevoContacto += "<div class='col-xs-12 col-sm-8 col-md-6'>";
+                  nuevoContacto += data.nombre;
+                  nuevoContacto += "</div>"; 
+                  nuevoContacto += "<div class='col-xs-12 col-sm-8 col-md-6'>";
+                  nuevoContacto += data.email;
+                  nuevoContacto += "</div>"; 
+                  nuevoContacto += "<div class='col-xs-12 col-sm-8 col-md-6'>";
+                  nuevoContacto += data.fechaIngreso;
+                  nuevoContacto += "</div>"; 
+                  nuevoContacto += "<div class='col-xs-12 col-sm-8 col-md-6'>";
+                  nuevoContacto += data.fechaNacimiento;
+                  nuevoContacto += "</div>"; 
+                  nuevoContacto += "<div class='col-xs-12 col-sm-8 col-md-6'>";
+                  nuevoContacto += data.webSite;
+                  nuevoContacto += "</div>";                   
+                  nuevoContacto += "</div>"; 
+                 console.log(nuevoContacto);
+                 $("#salida").html(nuevoContacto);     
+                 
+            }
+
+        })
+        .fail(function (peticion, textStatus, errorThrown) {
+             alert(peticion.responseText + "\n" + textStatus + "\n" + errorThrown);            
+            })
+    });
+
+   function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }   
+
+});

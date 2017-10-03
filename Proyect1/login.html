@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="css/estilos.css">
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+      <script src=""></script>
+    <title></title>
+</head>
+<body>
+<div>
+    <h2>Login</h2>
+   <form action="" method="POST" class="form">
+
+   
+      <label for="mail">Usuario</label>
+        <input type="text" id="email" name="email" placeholder="Username or email">
+        
+</br>
+        <label for="clave">Clave</label>
+          <input type="password" id="password" name="password" placeholder="Password">
+      </br>
+
+        <input type="submit"  value="Sig In" id="sigIn">
+       </form>
+ 		</div>
+
+
+    
+</body>
+</html>
+<script> 
+
+ $("#sigIn").click(function () {        
+       // alert("hice click en sigIn");
+
+        //preparo los datos
+        var email = $("#email").val();
+        var password = $("#password").val();
+        //armo mi objeto
+        var datosLogin = {
+                email: email,
+                password: password
+            }
+
+        // ESTA ES LA MAGIA!!!!  para enviar datos
+        var objJson = JSON.stringify(datosLogin);
+
+         if(email != "" && password != ""){
+
+        //petición ajax    
+        $.ajax({
+            "url": 'http://localhost:1337/login',
+            "type": 'POST',
+            "data": objJson, 
+            "dataType": 'JSON',
+            "success": function (data) {
+            // alert("success");
+            console.log(data);
+            var url = "file:///E:/Labo2017/000SegundoCuatri/Proyect1/index.html";// CAMBIARLO POR LA UBICACION ACTUAL DEL INDEX.HTML!!!!
+            url = url + "?email="  + document.getElementById('email').value;                   
+            url = url + "&color=" + data.preferencias.color;
+            url = url + "&fuente=" + data.preferencias.font;
+               	if (data.autenticado =="si") {
+			localStorage.setItem("datos",data);
+			window.location.replace(url);
+		}
+		else{
+			alert(data);
+		}
+             //   window.location.replace(url);
+            }
+
+            })
+            .fail(function (p, ts, et) {
+                console.log(p);
+                 alert("faiil");
+            })
+           }   
+    });
+
+  </script>
