@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="clases/Persona.js"></script>
+    <script src="clases/Empleado.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+   
+    <div class="row">
+    <section id="inscripcion" style="background-color:lightseagreen;padding-top:65px;padding-bottom:45px;">
+        
+   
+  <div class="container ">  
+             <div class="col-sm-4">
+       
+
+   
+        <h2>Formulario de Empleados</h2>
+       
+            <div class="form-group col-dm-6">
+                <label for="id">Id</label>
+                </br>
+                <input type="number" class=" sinError form-control" name="txtID" id="txtID" min="0" step="1" placeholder="ID">
+           </br>
+            </div>
+            <div class="for-group  col-dm-6">
+                <label for="nombre">Nombre</label>
+                <br>
+                <input type="text" id="txtnombre" class="sinError form-control" name="nombre" placeholder="Ingrese nombre.." autocomplete="off"
+                    autofocus>
+                <br>
+            </div>
+            <div class="form-group  col-dm-6 ">
+                <label for="edad">Edad</label>
+                <br>
+                <input type="text" id="txtedad" class="sinError form-control" name="edad" min="0" step="1" placeholder="Ingrese edad.." autocomplete="off">
+                <br>
+            </div>
+            </br>
+            <div class="form-group  col-dm-6">
+                <label for="Tipo">Tipo</label>
+                </br>
+                <select " for-control" id="cmbTipo">
+                 <option value="" disabled selected>Seleccione tipo</option>
+                <option value="0">Guardia </option>
+                <option value="1">Analista </option>
+                <option value="2">Desarrollador </option>
+                <option value="3">Jefe</option>
+                <option value="4">Gerente </option>
+                <option value="5">Limpieza </option>
+            </select>
+            </br>
+            </div>
+            <div class="form-group  col-dm-6">
+                <label for="cantidadPatas"> Cargar Imagen</label>
+                </br>
+                <input type='file' id="txtFoto" onchange="readURL(this);" />
+              
+          </br>
+            </div>
+            <div class="form-group  col-dm-6">
+               
+                    <button class='btn btn-success btn-block'   data-dismiss="modal" type="button" id="btnAgregar">  Guardar </button>
+                </div>
+            </div>
+         
+
+<div class="col-sm-8">
+                    <div class="form-inline">
+                       
+    <div class="bg-info container-fluid">
+                                <h2>FILTROS</h2>
+                              <label for="cmbFiltro">Filtrar Por</label> 
+                              <select  class="form-control" id="cmbFiltro" name="cmbfiltro">
+                            <option value="0">Guardia</option> 
+                            <option value="1">Analista</option> 
+                            <option value="2">Desarrollador</option> 
+                            <option value="3">Jefe</option> 
+                            <option value="4">Gerente</option> 
+                           <option value="5">Limpieza</option> 
+                           <option value="6">Todos</option> 
+                           </select>
+        
+
+                        </br>
+                       </br>
+                        <label for"">Promedio</label> 
+                        <input type="text" class="form-control" name="txtProm"id="txtProm">
+                        </br>
+                       </br>
+                        <input type="button" class="btn btn-success btn-block" value="Calcular" id="btnFiltrar">
+                       </br>
+             
+                    <div class="checkbox-inline">
+                      
+                    <label><input type="checkbox" name="chId" id="chId"  checked>Id</label>
+                    </div>
+             <div class="checkbox-inline">
+                      
+                    <label><input type="checkbox" name="chNombre" id="chNombre" checked>Nombre</label>
+                    </div>
+                 <div class="checkbox-inline">
+                      
+                    <label><input type="checkbox" name="chEdad" id="chEdad"checked>Edad</label>
+                    </div>
+                 <div class="checkbox-inline">
+                      
+                    <label><input type="checkbox" name="chfoto" id="chFoto" checked>Foto</label>
+                    </div>
+                </div>
+                        </div>
+                
+            </div>
+   <div id="spinner">
+       
+  </div>
+
+
+    <section id="listado" class="container" style="padding-top: 45px;">
+        <h2>Listado de mascotas</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-condensed" >
+              <thead id="tabla">
+
+                            </thead>
+             
+                   <tbody id="tCuerpo" class="table table-striped table-bordered table-hover table-condensed">
+            <img src="" id="tableBanner" />
+                            </tbody>
+            </table>
+              
+       
+       
+    </section>
+     </section>
+    </div>
+    </body>
+
+</html>

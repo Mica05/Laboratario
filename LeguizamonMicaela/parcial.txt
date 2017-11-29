@@ -1,0 +1,28 @@
+namespace clases
+{
+export clases  
+
+}
+
+expor enum tipoMascota
+{
+    perro,
+    gato,Reptil,
+    Roedor,
+    Ave,
+    Pez
+}
+
+el app 
+$(function(){
+    localstorage.clear();
+});
+
+function agregar mascota():void{
+    let id:number= Number($('#txtId').val);
+    let tipo:calses.tipoMascotas(Number($))
+           
+           let MascotasString :string|null=localStorage.getItem("Mascotas");
+
+           let mascotasJeson:Json[]=Mascotas String==null>?[]
+}
